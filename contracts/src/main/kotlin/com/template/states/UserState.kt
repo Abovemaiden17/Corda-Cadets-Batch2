@@ -11,6 +11,7 @@ data class UserState(val email: String,
                      val username: String,
                      val password: String,
                      val user: Party,
+                     val verification : Boolean,
                      override val linearId: UniqueIdentifier = UniqueIdentifier(),
                      override val participants: List<Party> = listOf(user)
 ): LinearState
