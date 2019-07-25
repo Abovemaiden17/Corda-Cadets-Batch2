@@ -4,15 +4,15 @@ import com.template.contracts.UserContract
 import net.corda.core.contracts.BelongsToContract
 import net.corda.core.contracts.LinearState
 import net.corda.core.contracts.UniqueIdentifier
-import net.corda.core.identity.AbstractParty
 import net.corda.core.identity.Party
-import javax.print.attribute.standard.JobOriginatingUserName
 
 @BelongsToContract(UserContract::class)
-data class UserState (val email: String,
-                      val username: String,
-                      val password: String,
-                      val user: Party,
-                      override val linearId: UniqueIdentifier =UniqueIdentifier(),
-                      override val participants: List<Party> = listOf(user)
+data class UserState(val email: String,
+                     val username: String,
+                     val password: String,
+                     val user: Party,
+                     val user2: Party,
+                     val verification : Boolean,
+                     override val linearId: UniqueIdentifier = UniqueIdentifier(),
+                     override val participants: List<Party> = listOf(user,user2)
 ): LinearState
