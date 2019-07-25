@@ -1,10 +1,10 @@
-2019-07-25 15:13:33,580 main WARN Unable to instantiate org.fusesource.jansi.WindowsAnsiOutputStream
-2019-07-25 15:13:33,584 main WARN Unable to instantiate org.fusesource.jansi.WindowsAnsiOutputStream
+2019-07-25 16:13:42,064 main WARN Unable to instantiate org.fusesource.jansi.WindowsAnsiOutputStream
+2019-07-25 16:13:42,067 main WARN Unable to instantiate org.fusesource.jansi.WindowsAnsiOutputStream
 
    ______               __
   / ____/     _________/ /___ _
- / /     __  / ___/ __  / __ `/         Some bankers are generous ...
-/ /___  /_/ / /  / /_/ / /_/ /          to a vault!  
+ / /     __  / ___/ __  / __ `/         It's not who you know, it's who you know
+/ /___  /_/ / /  / /_/ / /_/ /          knows what you know you know.
 \____/     /_/   \__,_/\__,_/
 
 --- Corda Open Source 4.0 (503a2ff) -------------------------------------------------------------

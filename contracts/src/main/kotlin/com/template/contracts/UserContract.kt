@@ -13,6 +13,7 @@ class UserContract : Contract {
     interface Commands : CommandData{
         class Register :TypeOnlyCommandData(), Commands
         class Validate : TypeOnlyCommandData(), Commands
+        class Update : TypeOnlyCommandData(), Commands
     }
 
     override fun verify(tx: LedgerTransaction) {
@@ -25,6 +26,10 @@ class UserContract : Contract {
 
             is Commands.Validate -> requireThat{
 
+
+            }
+
+            is Commands.Update -> requireThat {
 
             }
 
