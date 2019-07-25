@@ -27,22 +27,15 @@ class UserFlows(private val email: String,
     @Suspendable
     override fun call():SignedTransaction {
         // Initiator flow logic goes here.
-        progressTracker.currentStep = GETTING_NOTARY
         val notary = serviceHub.networkMapCache.notaryIdentities.first()
-
-        progressTracker.currentStep = GENERATING_TRANSACTION
-
-        val userState = UserState(email,username,password, ourIdentity)
+        val userState = UserState(email,username,password, ourIdentity,ourIdentity,verification = false)
         val txCommand = Command(UserContract.Commands.Register(), ourIdentity.owningKey)
         val txBuilder = TransactionBuilder(notary)
                 .addOutputState(userState, UserContract.User_ID)
                 .addCommand(txCommand)
-        progressTracker.currentStep = VERIFYING_TRANSACTION
         txBuilder.verify(serviceHub)
-        progressTracker.currentStep = SIGNING_TRANSACTION
         val partySignedTx =
                 serviceHub.signInitialTransaction(txBuilder)
-        progressTracker.currentStep = FINALISING_TRANSACTION
         return subFlow(FinalityFlow(partySignedTx, listOf()))
     }
 }
