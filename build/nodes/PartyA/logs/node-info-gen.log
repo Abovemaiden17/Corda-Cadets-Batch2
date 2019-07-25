@@ -1,0 +1,13 @@
+2019-07-25 10:13:43,427 main WARN Unable to instantiate org.fusesource.jansi.WindowsAnsiOutputStream
+2019-07-25 10:13:43,431 main WARN Unable to instantiate org.fusesource.jansi.WindowsAnsiOutputStream
+
+   ______               __
+  / ____/     _________/ /___ _
+ / /     __  / ___/ __  / __ `/         What you can buy for a dollar these
+/ /___  /_/ / /  / /_/ / /_/ /          days is absolute non-cents! 
+\____/     /_/   \__,_/\__,_/
+
+--- Corda Open Source 4.0 (503a2ff) -------------------------------------------------------------
+
+
+Logs can be found in                    : C:\Users\jhan\Corda-Cadets-Batch2\build\nodes\PartyA\logs

@@ -1,0 +1,13 @@
+2019-07-25 10:13:36,502 main WARN Unable to instantiate org.fusesource.jansi.WindowsAnsiOutputStream
+2019-07-25 10:13:36,506 main WARN Unable to instantiate org.fusesource.jansi.WindowsAnsiOutputStream
+
+   ______               __
+  / ____/     _________/ /___ _
+ / /     __  / ___/ __  / __ `/         There are two rules for financial success:
+/ /___  /_/ / /  / /_/ / /_/ /          1) Don't tell everything you know.
+\____/     /_/   \__,_/\__,_/
+
+--- Corda Open Source 4.0 (503a2ff) -------------------------------------------------------------
+
+
+Logs can be found in                    : C:\Users\jhan\Corda-Cadets-Batch2\build\nodes\PartyB\logs
