@@ -1,10 +1,10 @@
-2019-07-25 09:31:48,141 main WARN Unable to instantiate org.fusesource.jansi.WindowsAnsiOutputStream
-2019-07-25 09:31:48,149 main WARN Unable to instantiate org.fusesource.jansi.WindowsAnsiOutputStream
+2019-07-25 15:13:45,484 main WARN Unable to instantiate org.fusesource.jansi.WindowsAnsiOutputStream
+2019-07-25 15:13:45,487 main WARN Unable to instantiate org.fusesource.jansi.WindowsAnsiOutputStream
 
    ______               __
   / ____/     _________/ /___ _
- / /     __  / ___/ __  / __ `/         The only distributed ledger that pays
-/ /___  /_/ / /  / /_/ / /_/ /          homage to Pac Man in its logo.
+ / /     __  / ___/ __  / __ `/         What you can buy for a dollar these
+/ /___  /_/ / /  / /_/ / /_/ /          days is absolute non-cents! 
 \____/     /_/   \__,_/\__,_/
 
 --- Corda Open Source 4.0 (503a2ff) -------------------------------------------------------------

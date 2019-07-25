@@ -2,12 +2,15 @@ package com.template.flows
 
 import co.paralleluniverse.fibers.Suspendable
 import com.template.contracts.UserContract
+import com.template.contracts.UserContract.Companion.User_ID
 import com.template.states.UserState
 import net.corda.core.contracts.Command
 import net.corda.core.contracts.UniqueIdentifier
 import net.corda.core.contracts.requireThat
 import net.corda.core.flows.*
+import net.corda.core.identity.Party
 import net.corda.core.node.services.queryBy
+import net.corda.core.node.services.vault.QueryCriteria
 import net.corda.core.transactions.SignedTransaction
 import net.corda.core.transactions.TransactionBuilder
 import net.corda.core.utilities.ProgressTracker
@@ -19,9 +22,8 @@ import sun.security.util.Password
 // *********
 @InitiatingFlow
 @StartableByRPC
-class UserFlowsValidate(private val email: String,
-                private val username: String,
-                private val password: String) : FlowLogic<SignedTransaction>() {
+class UserFlowsValidate(private val user2: Party,
+                        private val linearId: UniqueIdentifier) : FlowLogic<SignedTransaction>() {
 
 
     override val progressTracker = ProgressTracker(GETTING_NOTARY, GENERATING_TRANSACTION,
@@ -30,14 +32,22 @@ class UserFlowsValidate(private val email: String,
     @Suspendable
     override fun call():SignedTransaction {
         // Initiator flow logic goes here.
+        val queryCriteria = QueryCriteria.LinearStateQueryCriteria(linearId = listOf(linearId))
+        val inputUserStateAndRef = serviceHub.vaultService.queryBy<UserState>(queryCriteria).states.single()
+        val inputStateData = inputUserStateAndRef.state.data
         progressTracker.currentStep = GETTING_NOTARY
-        val notary = serviceHub.networkMapCache.notaryIdentities.first()
+        val notary = inputUserStateAndRef.state.notary
         progressTracker.currentStep = GENERATING_TRANSACTION
-        val userState = UserState(email,username,password, ourIdentity,verification = true)
-        val txCommand = Command(UserContract.Commands.Validate(),ourIdentity.owningKey)
+        val outputState = UserState(inputStateData.email,inputStateData.username,inputStateData.password,ourIdentity,user2,true,inputStateData.linearId)//, listOf(ourIdentity)
+        println(outputState)
+        val txCommand =
+                Command(UserContract.Commands.Validate(),listOf(ourIdentity.owningKey,user2.owningKey ))
+
         val txBuilder = TransactionBuilder(notary)
-                .addOutputState(userState, UserContract.User_ID)
+                .addInputState(inputUserStateAndRef)
+                .addOutputState(outputState, User_ID)
                 .addCommand(txCommand)
+
         progressTracker.currentStep = VERIFYING_TRANSACTION
         txBuilder.verify(serviceHub)
         progressTracker.currentStep = SIGNING_TRANSACTION
@@ -45,8 +55,10 @@ class UserFlowsValidate(private val email: String,
                 serviceHub.signInitialTransaction(txBuilder)
         progressTracker.currentStep = FINALISING_TRANSACTION
 
-        val sessions = (userState.participants - ourIdentity).map { initiateFlow(it) }.toSet()
-        val stx = subFlow(CollectSignaturesFlow(partySignedTx, sessions))
+        //val sessions = (inputStateData.participants - ourIdentity + user2).map { initiateFlow(it) }.toSet()
+        val sessions = initiateFlow(user2)
+        //val stx = subFlow(CollectSignaturesFlow(partySignedTx, listOf(sessions)))
+        val stx = subFlow(CollectSignaturesFlow(partySignedTx, listOf(sessions)))
         return subFlow(FinalityFlow(stx,sessions))
     }
 }
@@ -59,7 +71,7 @@ class UserFlowsValidateResponder(val flowSession: FlowSession): FlowLogic<Signed
         val signedTransactionFlow = object : SignTransactionFlow(flowSession) {
             override fun checkTransaction(stx: SignedTransaction) = requireThat {
                 val output = stx.tx.outputs.single().data
-                "This must be an IOU transaction" using (output is UserState)
+                "This must be a transaction" using (output is UserState)
             }
         }
         val txWeJustSignedId = subFlow(signedTransactionFlow)

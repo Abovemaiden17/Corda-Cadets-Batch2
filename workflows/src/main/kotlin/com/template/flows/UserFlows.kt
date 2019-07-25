@@ -18,14 +18,15 @@ import net.corda.core.utilities.ProgressTracker
 @StartableByRPC
 class UserFlows(private val email: String,
                 private val username: String,
-                private val password: String) : FlowLogic<SignedTransaction>() {
+                private val password: String
+                ) : FlowLogic<SignedTransaction>() {
 
 
     @Suspendable
     override fun call():SignedTransaction {
         // Initiator flow logic goes here.
         val notary = serviceHub.networkMapCache.notaryIdentities.first()
-        val userState = UserState(email,username,password, ourIdentity,verification = false)
+        val userState = UserState(email,username,password, ourIdentity,ourIdentity,verification = false)
         val txCommand = Command(UserContract.Commands.Register(), ourIdentity.owningKey)
         val txBuilder = TransactionBuilder(notary)
                 .addOutputState(userState, UserContract.User_ID)
