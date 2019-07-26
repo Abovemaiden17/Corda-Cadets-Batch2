@@ -1,10 +1,10 @@
-2019-07-25 16:32:01,824 main WARN Unable to instantiate org.fusesource.jansi.WindowsAnsiOutputStream
-2019-07-25 16:32:01,854 main WARN Unable to instantiate org.fusesource.jansi.WindowsAnsiOutputStream
+2019-07-26 10:50:24,094 main WARN Unable to instantiate org.fusesource.jansi.WindowsAnsiOutputStream
+2019-07-26 10:50:24,097 main WARN Unable to instantiate org.fusesource.jansi.WindowsAnsiOutputStream
 
    ______               __
   / ____/     _________/ /___ _
- / /     __  / ___/ __  / __ `/         There was an earthquake in California,
-/ /___  /_/ / /  / /_/ / /_/ /          a local bank went into de-fault.
+ / /     __  / ___/ __  / __ `/         Ah, Friday.
+/ /___  /_/ / /  / /_/ / /_/ /          My second favourite F-word.
 \____/     /_/   \__,_/\__,_/
 
 --- Corda Open Source 4.0 (503a2ff) -------------------------------------------------------------
